@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using System.Windows;
 
 namespace AndroidTools
 {
+    // Input codes https://stackoverflow.com/questions/7789826/adb-shell-input-events
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -35,6 +38,81 @@ namespace AndroidTools
             }
         }
 
+        private string RunScriptWithOutput(string commands)
+        {
+            try
+            {
+                var actualCommand = commands.Split('\n');
+                var powershellOutputCommand = new StringBuilder();
+                var test = new StringBuilder();
+                using (var powerShell = PowerShell.Create())
+                {
+                    //powerShell.AddCommand("adb shell");
+                    foreach (var command in actualCommand)
+                    {
+                        powerShell.AddScript(command);
+                        Debug.WriteLine("ADDED");
+                    }
+                    Debug.WriteLine("INVOKING");
+                    var powerShellOutput = powerShell.Invoke();
+                    Debug.WriteLine("INVOKED: " + powerShellOutput);
+                    /*
+                    if (powerShellOutput.Count != 0)
+                    {
+                        foreach (var line in powerShellOutput)
+                        {
+                            try
+                            {
+                                foreach (var member in line.Members)
+                                {
+                                    test.Append("Member NAME: " + member.Name + " VALUE " + member.Value);
+                                }
+                                foreach (var property in line.Properties)
+                                {
+                                    powershellOutputCommand.Append(
+                                        "Property NAME: " + property.Name + " VALUE " + property.Value);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine(e);
+                            }
+                        }
+                    }
+                    */
+                }
+
+                return powershellOutputCommand.Append(test).ToString();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return "";
+        }
+
+        private void Test(string commands)
+        {
+            using (Process proc = new Process())
+            {
+                ProcessStartInfo procStartInfo = new ProcessStartInfo("F:\\Android\\android-sdk\\platform-tools\\adb.exe");
+                procStartInfo.RedirectStandardInput = true;
+                procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.RedirectStandardError = true;
+                procStartInfo.UseShellExecute = false;
+                procStartInfo.CreateNoWindow = true;
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                var actualCommand = commands.Split('\n');
+                foreach (var line in actualCommand)
+                {
+                    proc.StandardInput.WriteLine(line);
+                }
+                proc.WaitForExit();
+            } 
+        }
+
         private void OnShowNavBarClick(object sender, RoutedEventArgs e)
         {
             var showNavBarCommand = "adb shell wm overscan 0,0,0,0";
@@ -52,7 +130,8 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(
                 "adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings\n");
-            stringBuilder.Append("adb shell input keyevent 20 & adb shell input keyevent 23");
+            stringBuilder.Append(
+                "adb shell input keyevent 23 \"&\" adb shell input keyevent 19");
             RunScript(stringBuilder.ToString());
         }
 
@@ -61,23 +140,32 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(
                 "adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings\n");
-            stringBuilder.Append("adb shell input keyevent 20 & adb shell input keyevent 23");
+            stringBuilder.Append(
+                "adb shell input keyevent 23 \"&\" adb shell input keyevent 19");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnAirplaneModeOnClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell settings put global airplane_mode_on 1\n");
-            stringBuilder.Append("adb shell am broadcast -a android.intent.action.AIRPLANE_MODE");
+            //stringBuilder.Append("adb shell settings put global airplane_mode_on 1\n");
+            //stringBuilder.Append("adb shell am broadcast -a android.intent.action.AIRPLANE_MODE");
+            stringBuilder.Append("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS\n");
+            stringBuilder.Append("adb shell input keyevent 19\n");
+            stringBuilder.Append("adb shell input keyevent 23\n");
+            stringBuilder.Append("adb shell input keyevent 22\n");
+            stringBuilder.Append("adb shell input keyevent 23");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnAirplaneModeOffClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell settings put global airplane_mode_on 0\n");
-            stringBuilder.Append("adb shell am broadcast -a android.intent.action.AIRPLANE_MODE");
+            //stringBuilder.Append("adb shell settings put global airplane_mode_on 0\n");
+            //stringBuilder.Append("adb shell am broadcast -a android.intent.action.AIRPLANE_MODE");
+            stringBuilder.Append("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS\n");
+            stringBuilder.Append("adb shell input keyevent 19\n");
+            stringBuilder.Append("adb shell input keyevent 23");
             RunScript(stringBuilder.ToString());
         }
 
@@ -85,7 +173,7 @@ namespace AndroidTools
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(
-                "adb shell am start -a android.settings.APPLICATION_DETAILS_SETTINGS package:" + DrawOverAppsSource.Text + "\n");
+                "adb shell am start -a android.settings.APPLICATION_DETAILS_SETTINGS package:" + AppName.Text + "\n");
             stringBuilder.Append("sleep 5\n");
             stringBuilder.Append("adb shell input tap 160 1760\n");
             stringBuilder.Append("sleep 1\n");
@@ -135,60 +223,58 @@ namespace AndroidTools
 
         private void OnDisableBluetoothClick(object sender, RoutedEventArgs e)
         {
-            /**
+            
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISABLE\n");
-            stringBuilder.Append("sleep 2\n");
-            stringBuilder.Append("adb shell input keyevent 22\n");
-            stringBuilder.Append("adb shell input keyevent 22\n");
-            stringBuilder.Append("adb shell input keyevent 66\n");
+            stringBuilder.Append("adb shell am start -a android.settings.BLUETOOTH_SETTINGS\n");
+            stringBuilder.Append("adb shell input keyevent 19\n");
+            stringBuilder.Append("adb shell input keyevent 23\n");
             RunScript(stringBuilder.ToString());
-    */
+    
         }
 
         private void OnEnableLocationClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm grant com.zephyrsleep.tablet android.permission.ACCESS_FINE_LOCATION\n");
-            stringBuilder.Append("adb shell pm grant com.zephyrsleep.tablet android.permission.ACCESS_COARSE_LOCATION\n");
+            stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.ACCESS_FINE_LOCATION\n");
+            stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.ACCESS_COARSE_LOCATION\n");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnDisableLocationClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm revoke com.zephyrsleep.tablet android.permission.ACCESS_FINE_LOCATION\n");
-            stringBuilder.Append("adb shell pm revoke com.zephyrsleep.tablet android.permission.ACCESS_COARSE_LOCATION\n");
+            stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.ACCESS_FINE_LOCATION\n");
+            stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.ACCESS_COARSE_LOCATION\n");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnEnablePhoneClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm grant com.zephyrsleep.tablet android.permission.READ_PHONE_STATE");
+            stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.READ_PHONE_STATE");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnDisablePhoneClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm revoke com.zephyrsleep.tablet android.permission.READ_PHONE_STATE");
+            stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.READ_PHONE_STATE");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnEnableStorageClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm grant com.zephyrsleep.tablet android.permission.WRITE_EXTERNAL_STORAGE\n");
-            stringBuilder.Append("adb shell pm grant com.zephyrsleep.tablet android.permission.READ_EXTERNAL_STORAGE\n");
+            stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.WRITE_EXTERNAL_STORAGE\n");
+            stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.READ_EXTERNAL_STORAGE\n");
             RunScript(stringBuilder.ToString());
         }
 
         private void OnDisableStorageClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell pm revoke com.zephyrsleep.tablet android.permission.WRITE_EXTERNAL_STORAGE\n");
-            stringBuilder.Append("adb shell pm revoke com.zephyrsleep.tablet android.permission.READ_EXTERNAL_STORAGE\n");
+            stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.WRITE_EXTERNAL_STORAGE\n");
+            stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.READ_EXTERNAL_STORAGE\n");
             RunScript(stringBuilder.ToString());
         }
 
@@ -227,6 +313,87 @@ namespace AndroidTools
             var duration = int.Parse(ScreenRecordDuration.Text);
             var recordScreenCommand = "adb shell screenrecord --time-limit " + duration + " /mnt/sdcard/Movies/" + ScreenRecordPath.Text + ".mp4";
             RunScript(recordScreenCommand);
+        }
+
+        private void OnBackButtonClick(object sender, RoutedEventArgs e)
+        {
+            var backCommand = "adb shell input keyevent 4";
+            RunScript(backCommand);
+        }
+
+        private void OnHomeButtonClick(object sender, RoutedEventArgs e)
+        {
+            var homeCommand = "adb shell input keyevent 3";
+            RunScript(homeCommand);
+        }
+
+        private void OnMultitaskButtonClick(object sender, RoutedEventArgs e)
+        {
+            var multitaskCommand = "adb shell input keyevent 187";
+            RunScript(multitaskCommand);
+        }
+
+        private void OnBrightenClick(object sender, RoutedEventArgs e)
+        {
+            var brightenCommand = "adb shell input keyevent 221";
+            RunScript(brightenCommand);
+        }
+
+        private void OnDimClick(object sender, RoutedEventArgs e)
+        {
+            var dimCommand = "adb shell input keyevent 220";
+            RunScript(dimCommand);
+        }
+
+        private void OnPowerClick(object sender, RoutedEventArgs e)
+        {
+            var powerCommand = "adb shell input keyevent 26";
+            RunScript(powerCommand);
+        }
+
+        private void OnVolumeUpClick(object sender, RoutedEventArgs e)
+        {
+            var upVolumeCommand = "adb shell input keyevent 24";
+            RunScript(upVolumeCommand);
+        }
+
+        private void OnVolumeDownClick(object sender, RoutedEventArgs e)
+        {
+            var downVolumeCommand = "adb shell input keyevent 25";
+            RunScript(downVolumeCommand);
+        }
+
+        private void OnExpandStatusBarClick(object sender, RoutedEventArgs e)
+        {
+            var expandCommand = "adb shell cmd statusbar expand-settings";
+            RunScript(expandCommand);
+        }
+
+        private void OnCollapseStatusBarClick(object sender, RoutedEventArgs e)
+        {
+            var collapseCommand = "adb shell cmd statusbar collapse";
+            RunScript(collapseCommand);
+        }
+
+        private void OnExecuteAdbCommandClick(object sender, RoutedEventArgs e)
+        {
+            RunScript(AdbCommand.Text);
+        }
+
+        private void OnGetSharedPrefClick(object sender, RoutedEventArgs e)
+        {
+            var sharedPrefCommand = SharedPrefDestination.Text;
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("adb shell\n");
+            //stringBuilder.Append("sleep 5\n");
+            //stringBuilder.Append("run-as " + SharedPrefAppName.Text + "\n");
+            stringBuilder.Append("run-as com.zephyrsleep.tablet\n");
+            stringBuilder.Append("cd shared_prefs/\n");
+            //stringBuilder.Append("cat " + SharedPrefAppName.Text + ".PREFERENCES.xml\n");
+            stringBuilder.Append("cat com.zephyrsleep.tablet.PREFERENCES.xml\n");
+            stringBuilder.Append("exit");
+            
+            RunScriptWithOutput(stringBuilder.ToString());
         }
     }
 }
