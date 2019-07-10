@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace AndroidTools
 {
-    // Input codes https://stackoverflow.com/questions/7789826/adb-shell-input-events
+    // Input codes
+    // https://stackoverflow.com/questions/7789826/adb-shell-input-events
+    // https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -17,7 +21,32 @@ namespace AndroidTools
         public MainWindow()
         {
             InitializeComponent();
+            GetDeviceName();
         }
+
+        private void GetDeviceName()
+        {
+            var deviceName = "None";
+            try
+            {
+                var deviceInfoCommand = "adb devices -l";
+                var results = RunScriptWithOutput(deviceInfoCommand);
+                foreach (var name in results)
+                {
+                    if (name.Contains("device product"))
+                    {
+                        deviceName = name;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            ConnectedDevice.Text = deviceName;
+        }
+
         private void RunScript(string commands)
         {
             try
@@ -38,58 +67,36 @@ namespace AndroidTools
             }
         }
 
-        private string RunScriptWithOutput(string commands)
+        private List<string> RunScriptWithOutput(string commands)
         {
+            var powerShellOutputsList = new List<string>();
             try
             {
                 var actualCommand = commands.Split('\n');
-                var powershellOutputCommand = new StringBuilder();
                 var test = new StringBuilder();
                 using (var powerShell = PowerShell.Create())
                 {
-                    //powerShell.AddCommand("adb shell");
                     foreach (var command in actualCommand)
                     {
                         powerShell.AddScript(command);
-                        Debug.WriteLine("ADDED");
                     }
-                    Debug.WriteLine("INVOKING");
                     var powerShellOutput = powerShell.Invoke();
-                    Debug.WriteLine("INVOKED: " + powerShellOutput);
-                    /*
                     if (powerShellOutput.Count != 0)
                     {
                         foreach (var line in powerShellOutput)
                         {
-                            try
-                            {
-                                foreach (var member in line.Members)
-                                {
-                                    test.Append("Member NAME: " + member.Name + " VALUE " + member.Value);
-                                }
-                                foreach (var property in line.Properties)
-                                {
-                                    powershellOutputCommand.Append(
-                                        "Property NAME: " + property.Name + " VALUE " + property.Value);
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                Debug.WriteLine(e);
-                            }
+                            powerShellOutputsList.Add(line.ToString());
                         }
                     }
-                    */
                 }
 
-                return powershellOutputCommand.Append(test).ToString();
+                return powerShellOutputsList;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
             }
-
-            return "";
+            return powerShellOutputsList;
         }
 
         private void Test(string commands)
@@ -385,15 +392,18 @@ namespace AndroidTools
             var sharedPrefCommand = SharedPrefDestination.Text;
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell\n");
-            //stringBuilder.Append("sleep 5\n");
-            //stringBuilder.Append("run-as " + SharedPrefAppName.Text + "\n");
-            stringBuilder.Append("run-as com.zephyrsleep.tablet\n");
+            stringBuilder.Append("run-as " + SharedPrefAppName.Text + "\n");
             stringBuilder.Append("cd shared_prefs/\n");
-            //stringBuilder.Append("cat " + SharedPrefAppName.Text + ".PREFERENCES.xml\n");
-            stringBuilder.Append("cat com.zephyrsleep.tablet.PREFERENCES.xml\n");
+            stringBuilder.Append("cat " + SharedPrefAppName.Text + ".PREFERENCES.xml\n");
+            stringBuilder.Append("exit\n");
             stringBuilder.Append("exit");
-            
-            RunScriptWithOutput(stringBuilder.ToString());
+            var result = RunScriptWithOutput(stringBuilder.ToString());
+            Debug.WriteLine("RESULT: " + result);
+        }
+
+        private void OnRefreshDeviceClick(object sender, RoutedEventArgs e)
+        {
+            GetDeviceName();
         }
     }
 }
