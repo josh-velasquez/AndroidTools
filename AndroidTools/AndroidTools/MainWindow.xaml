@@ -46,8 +46,8 @@
         <Label Content="USB Debugging" HorizontalAlignment="Left" Margin="396,154,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Broadcasts" HorizontalAlignment="Left" Margin="396,213,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Home App" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="InstallSource" HorizontalAlignment="Left" Height="23" Margin="432,66,0,0" TextWrapping="Wrap" Text="C:\Desktop\Sample\com.test.app" VerticalAlignment="Top" Width="194"/>
-        <TextBox x:Name="UninstallSource" HorizontalAlignment="Left" Height="23" Margin="432,126,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="194"/>
+        <TextBox x:Name="InstallSource" HorizontalAlignment="Left" Height="23" Margin="432,66,0,0" TextWrapping="Wrap" Text="C:\Desktop\Sample\com.test.app" VerticalAlignment="Top" Width="244"/>
+        <TextBox x:Name="UninstallSource" HorizontalAlignment="Left" Height="23" Margin="432,126,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244"/>
         <Label Content="Reboot" HorizontalAlignment="Left" Margin="202,213,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Pull" HorizontalAlignment="Left" Margin="551,327,0,0" VerticalAlignment="Top" Width="125" Height="25" Click="OnPullClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Reboot App" HorizontalAlignment="Left" Margin="223,239,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootClick" Background="#FFFB3640" Foreground="White"/>
@@ -89,6 +89,6 @@
         <Button Content="Execute adb Command" HorizontalAlignment="Left" Margin="414,440,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnExecuteAdbCommandClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
         <TextBox x:Name="SharedPrefDestination" HorizontalAlignment="Left" Height="20" Margin="256,321,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="106"/>
         <Button Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="223,291,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnGetSharedPrefClick" IsEnabled="False" Background="#FFFB3640"/>
-        <TextBox x:Name="SharedPrefAppName" HorizontalAlignment="Left" Height="20" Margin="232,346,0,0" TextWrapping="Wrap" Text="com.zephyrsleep.tablet" VerticalAlignment="Top" Width="130"/>
+        <TextBox x:Name="SharedPrefAppName" HorizontalAlignment="Left" Height="20" Margin="232,346,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="130"/>
     </Grid>
 </Window>
