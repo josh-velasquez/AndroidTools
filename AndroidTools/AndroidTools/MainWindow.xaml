@@ -19,20 +19,20 @@
         <Label Content="Airplane Mode" HorizontalAlignment="Left" Margin="202,161,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="On" HorizontalAlignment="Left" Margin="223,188,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnAirplaneModeOnClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Off" HorizontalAlignment="Left" Margin="295,188,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnAirplaneModeOffClick" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Installation" HorizontalAlignment="Left" Margin="395,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.562,0" Foreground="White"/>
-        <Button Content="Uninstall App" HorizontalAlignment="Left" Margin="419,96,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnUninstallAppClick" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Disable USB Debugging" HorizontalAlignment="Left" Margin="417,180,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnDisbaleUsbDebuggingClick" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Installation" HorizontalAlignment="Left" Margin="391,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.562,0" Foreground="White"/>
+        <Button Content="Uninstall App" HorizontalAlignment="Left" Margin="509,136,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnUninstallAppClick" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Disable USB Debugging" HorizontalAlignment="Left" Margin="223,291,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnDisbaleUsbDebuggingClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Draw Over Apps" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Allow Draw Over Apps" HorizontalAlignment="Left" Margin="32,239,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnAllowDrawOverAppClick" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Send Custom Broadcast" HorizontalAlignment="Left" Margin="414,239,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnSendCustomBroadcastClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <TextBox Name="BroadcastInput" HorizontalAlignment="Left" Height="21" Margin="432,269,0,0" TextWrapping="Wrap" Text="android.intent.action.BOOT_COMPLETED" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Button Content="Send Custom Broadcast" HorizontalAlignment="Left" Margin="509,230,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnSendCustomBroadcastClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <TextBox Name="BroadcastInput" HorizontalAlignment="Left" Height="40" Margin="410,185,0,0" TextWrapping="Wrap" Text="android.intent.action.BOOT_COMPLETED" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
         <Button Content="Set Home App" HorizontalAlignment="Left" Margin="32,291,0,0" VerticalAlignment="Top" Width="143" Height="25" Click="OnSetHomeAppClick" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Transfer" HorizontalAlignment="Left" Margin="393,292,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox Name="TransferSource" HorizontalAlignment="Left" Height="23" Margin="482,351,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="194" Background="#FFBAC1B8"/>
-        <Label Content="Source:" HorizontalAlignment="Left" Margin="414,351,0,0" VerticalAlignment="Top" FontSize="10" Foreground="White"/>
-        <TextBox Name="TransferDestination" HorizontalAlignment="Left" Height="23" Margin="482,379,0,0" TextWrapping="Wrap" Text="com.test.app/files" VerticalAlignment="Top" Width="194" Background="#FFBAC1B8"/>
-        <Label Content="Destination:" HorizontalAlignment="Left" Margin="414,379,0,0" VerticalAlignment="Top" FontSize="10" Foreground="White"/>
-        <Button Content="Push" HorizontalAlignment="Left" Margin="414,320,0,0" VerticalAlignment="Top" Width="125" Height="25" Click="OnPushClick" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Transfer" HorizontalAlignment="Left" Margin="391,255,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBox Name="TransferSource" HorizontalAlignment="Left" Height="40" Margin="459,277,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="194" Background="#FFBAC1B8"/>
+        <Label Content="Source:" HorizontalAlignment="Left" Margin="416,294,0,0" VerticalAlignment="Top" FontSize="10" Foreground="White"/>
+        <TextBox Name="TransferDestination" HorizontalAlignment="Left" Height="40" Margin="459,320,0,0" TextWrapping="Wrap" Text="com.test.app/files" VerticalAlignment="Top" Width="194" Background="#FFBAC1B8"/>
+        <Label Content="Destination:" HorizontalAlignment="Left" Margin="396,337,0,0" VerticalAlignment="Top" FontSize="10" Foreground="White"/>
+        <Button Content="Push" HorizontalAlignment="Left" Margin="458,365,0,0" VerticalAlignment="Top" Width="95" Height="25" Click="OnPushClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Bluetooth" HorizontalAlignment="Left" Margin="202,112,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Enable" HorizontalAlignment="Left" Margin="223,136,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnEnableBluetoothClick" Background="#FFFB3640" Foreground="White" />
         <Button Content="Disable" HorizontalAlignment="Left" Margin="295,136,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnDisableBluetoothClick" Background="#FFFB3640" Foreground="White" />
@@ -42,30 +42,30 @@
         <Label Content="Storage Permissions" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Enable" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnEnableStorageClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Disable" HorizontalAlignment="Left" Margin="109,189,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnDisableStorageClick" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Install App" HorizontalAlignment="Left" Margin="419,36,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInstallAppClick" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="USB Debugging" HorizontalAlignment="Left" Margin="396,154,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label Content="Broadcasts" HorizontalAlignment="Left" Margin="396,213,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Install App" HorizontalAlignment="Left" Margin="509,79,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInstallAppClick" Background="#FFFB3640" Foreground="White" RenderTransformOrigin="0.995,0.36"/>
+        <Label Content="USB Debugging" HorizontalAlignment="Left" Margin="202,265,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Broadcasts" HorizontalAlignment="Left" Margin="391,159,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Home App" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="InstallSource" HorizontalAlignment="Left" Height="23" Margin="432,66,0,0" TextWrapping="Wrap" Text="C:\Desktop\Sample\com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
-        <TextBox x:Name="UninstallSource" HorizontalAlignment="Left" Height="23" Margin="432,126,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <TextBox x:Name="InstallSource" HorizontalAlignment="Left" Height="40" Margin="410,34,0,0" TextWrapping="Wrap" Text="C:\Desktop\Sample\com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <TextBox x:Name="UninstallSource" HorizontalAlignment="Left" Height="23" Margin="410,108,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
         <Label Content="Reboot" HorizontalAlignment="Left" Margin="202,213,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Pull" HorizontalAlignment="Left" Margin="551,320,0,0" VerticalAlignment="Top" Width="125" Height="25" Click="OnPullClick" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Pull" HorizontalAlignment="Left" Margin="558,365,0,0" VerticalAlignment="Top" Width="95" Height="25" Click="OnPullClick" Background="#FFFB3640" Foreground="White" RenderTransformOrigin="0.969,0.56"/>
         <Button Content="Reboot App" HorizontalAlignment="Left" Margin="223,239,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootClick" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Screenshot" HorizontalAlignment="Left" Margin="689,10,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Take Screenshot" HorizontalAlignment="Left" Margin="712,36,0,0" VerticalAlignment="Top" Width="146"  Height="25" Click="OnScreenshotClick" Background="#FFFB3640" Foreground="White"/>
-        <TextBox x:Name="ScreenshotName" HorizontalAlignment="Left" Height="23" Margin="730,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="210" Background="#FFBAC1B8"/>
-        <TextBlock HorizontalAlignment="Left" Margin="944,75,0,0" TextWrapping="Wrap" Text=".png" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="762,96,0,0" TextWrapping="Wrap" Text="Images saved in devices Screenshot directory" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
-        <Label Content="Screen Record" HorizontalAlignment="Left" Margin="689,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.453,-1.077" Foreground="White"/>
-        <Button Content="Start Recording" HorizontalAlignment="Left" Margin="712,152,0,0" VerticalAlignment="Top" Width="146"  Height="25" Click="OnRecordScreenClick" RenderTransformOrigin="0.575,2.44" Background="#FFFB3640" Foreground="White"/>
-        <TextBox x:Name="ScreenRecordPath" HorizontalAlignment="Left" Height="23" Margin="730,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="210" Background="#FFBAC1B8"/>
-        <TextBlock HorizontalAlignment="Left" Margin="945,189,0,0" TextWrapping="Wrap" Text=".mp4" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="ScreenRecordDuration" HorizontalAlignment="Left" Height="23" Margin="843,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Background="#FFBAC1B8"/>
-        <TextBlock HorizontalAlignment="Left" Margin="731,213,0,0" TextWrapping="Wrap" Text="Duration (seconds): " VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="762,239,0,0" TextWrapping="Wrap" Text="Videos saved in Movies directory" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
+        <Label Content="Screenshot" HorizontalAlignment="Left" Margin="673,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Take Screenshot" HorizontalAlignment="Left" Margin="792,61,0,0" VerticalAlignment="Top" Width="145"  Height="25" Click="OnScreenshotClick" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="ScreenshotName" HorizontalAlignment="Left" Height="23" Margin="693,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="942,44,0,0" TextWrapping="Wrap" Text=".png" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="758,88,0,0" TextWrapping="Wrap" Text="Images saved in devices Screenshot directory" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
+        <Label Content="Screen Record" HorizontalAlignment="Left" Margin="673,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.453,-1.077" Foreground="White"/>
+        <Button Content="Start Recording" HorizontalAlignment="Left" Margin="792,188,0,0" VerticalAlignment="Top" Width="145"  Height="25" Click="OnRecordScreenClick" RenderTransformOrigin="0.575,2.44" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="ScreenRecordPath" HorizontalAlignment="Left" Height="23" Margin="693,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="942,141,0,0" TextWrapping="Wrap" Text=".mp4" VerticalAlignment="Top" Foreground="White"/>
+        <TextBox x:Name="ScreenRecordDuration" HorizontalAlignment="Left" Height="23" Margin="840,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Background="#FFBAC1B8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="729,166,0,0" TextWrapping="Wrap" Text="Duration (seconds): " VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="807,218,0,0" TextWrapping="Wrap" Text="Videos saved in Movies directory" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
         <TextBox x:Name="AppName" HorizontalAlignment="Left" Height="21" Margin="14,36,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="162" Background="#FFBAC1B8"/>
         <Label Content="App Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="202,264,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="673,233,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Back" HorizontalAlignment="Left" Margin="10,519,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.196,0.487"/>
         <Button Content="Back Button" HorizontalAlignment="Left" Margin="32,542,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnBackButtonClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Home" HorizontalAlignment="Left" Margin="10,567,0,0" VerticalAlignment="Top" Foreground="White"/>
@@ -83,14 +83,14 @@
         <Label Content="Status Bar" HorizontalAlignment="Left" Margin="10,468,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Expand" HorizontalAlignment="Left" Margin="32,495,0,0" VerticalAlignment="Top" Width="67" Height="24" Click="OnExpandStatusBarClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Collapse" HorizontalAlignment="Left" Margin="109,495,0,0" VerticalAlignment="Top" Width="66" Height="24" Click="OnCollapseStatusBarClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Custom adb Command" HorizontalAlignment="Left" Margin="397,407,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="AdbCommand" HorizontalAlignment="Left" Height="25" Margin="432,463,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
-        <Button Content="Execute adb Command" HorizontalAlignment="Left" Margin="414,433,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnExecuteAdbCommandClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <TextBox x:Name="SharedPrefDestination" HorizontalAlignment="Left" Height="20" Margin="245,321,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="117" Background="#FFBAC1B8"/>
-        <Button Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="223,291,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnGetSharedPrefClick" Background="#FFFB3640" Foreground="White" IsEnabled="False"/>
-        <TextBox x:Name="SharedPrefAppName" HorizontalAlignment="Left" Height="20" Margin="245,346,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="117" Background="#FFBAC1B8"/>
-        <Label Content="Connected Device:" HorizontalAlignment="Left" Margin="399,571,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock Name="ConnectedDevice" HorizontalAlignment="Left" Margin="442,597,0,0" TextWrapping="Wrap" Text="Device" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="551,573,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Custom adb Command" HorizontalAlignment="Left" Margin="391,391,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBox x:Name="AdbCommand" HorizontalAlignment="Left" Height="25" Margin="410,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Button Content="Execute adb Command" HorizontalAlignment="Left" Margin="510,447,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnExecuteAdbCommandClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="SharedPrefDestination" HorizontalAlignment="Left" Height="40" Margin="693,259,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Button Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="792,329,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnGetSharedPrefClick" Background="#FFFB3640" Foreground="White" IsEnabled="False"/>
+        <TextBox x:Name="SharedPrefAppName" HorizontalAlignment="Left" Height="20" Margin="693,304,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Label Content="Connected Device:" HorizontalAlignment="Left" Margin="239,574,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock Name="ConnectedDevice" HorizontalAlignment="Left" Margin="282,600,0,0" TextWrapping="Wrap" Text="Device" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="391,576,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
     </Grid>
 </Window>
