@@ -311,7 +311,7 @@ namespace AndroidTools
 
         private void OnScreenshotClick(object sender, RoutedEventArgs e)
         {
-            var screenshotCommand = "adb shell screencap /mnt/sdcard/Pictures/Screenshots/" + ScreenshotName.Text + ".png";
+            var screenshotCommand = "adb shell screencap /mnt/sdcard/Pictures/" + ScreenshotName.Text + ".png";
             RunScript(screenshotCommand);
         }
 
