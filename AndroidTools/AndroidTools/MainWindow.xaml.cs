@@ -293,13 +293,13 @@ namespace AndroidTools
 
         private void OnPushClick(object sender, RoutedEventArgs e)
         {
-            var transferCommand = "adb push " + TransferSource.Text + " /mnt/sdcard/Android/data/" + TransferDestination.Text;
+            var transferCommand = "adb push \"" + TransferSource.Text + "\" \"" + TransferDestination.Text + "\"";
             RunScript(transferCommand);
         }
 
         private void OnPullClick(object sender, RoutedEventArgs e)
         {
-            var transferCommand = "adb pull /mnt/sdcard/Android/data/" + TransferSource.Text + " " + TransferDestination.Text;
+            var transferCommand = "adb pull \"" + TransferSource.Text + "\" \"" + TransferDestination.Text + "\"";
             RunScript(transferCommand);
         }
 
