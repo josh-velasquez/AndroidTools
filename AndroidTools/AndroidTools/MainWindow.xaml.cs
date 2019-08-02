@@ -405,5 +405,17 @@ namespace AndroidTools
         {
             GetDeviceName();
         }
+
+        private void OnRebootBootloaderClick(object sender, RoutedEventArgs e)
+        {
+            var rebootCommand = "adb reboot bootloader";
+            RunScript(rebootCommand);
+        }
+
+        private void OnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            var settingsCommand = "adb shell am start -a android.settings.SETTINGS";
+            RunScript(settingsCommand);
+        }
     }
 }
