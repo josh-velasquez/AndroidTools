@@ -21,12 +21,13 @@ namespace AndroidTools
         public MainWindow()
         {
             InitializeComponent();
-            GetDeviceName();
+            GetDeviceNameAndVersion();
         }
 
-        private void GetDeviceName()
+        private void GetDeviceNameAndVersion()
         {
             var deviceName = "None";
+            var deviceVersion = "N/A";
             try
             {
                 var deviceInfoCommand = "adb devices -l";
@@ -38,6 +39,10 @@ namespace AndroidTools
                         deviceName = name;
                     }
                 }
+
+                var deviceVersionCommand = "adb shell getprop ro.build.version.release";
+                deviceVersion = RunScriptWithOutput(deviceVersionCommand)[0];
+
             }
             catch (Exception e)
             {
@@ -45,6 +50,7 @@ namespace AndroidTools
             }
 
             ConnectedDevice.Text = deviceName;
+            AndroidVersion.Text = deviceVersion;
         }
 
         private void RunScript(string commands)
@@ -387,23 +393,46 @@ namespace AndroidTools
             RunScript(AdbCommand.Text);
         }
 
-        private void OnGetSharedPrefClick(object sender, RoutedEventArgs e)
-        {
-            var sharedPrefCommand = SharedPrefDestination.Text;
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("adb shell\n");
-            stringBuilder.Append("run-as " + SharedPrefAppName.Text + "\n");
-            stringBuilder.Append("cd shared_prefs/\n");
-            stringBuilder.Append("cat " + SharedPrefAppName.Text + ".PREFERENCES.xml\n");
-            stringBuilder.Append("exit\n");
-            stringBuilder.Append("exit");
-            var result = RunScriptWithOutput(stringBuilder.ToString());
-            Debug.WriteLine("RESULT: " + result);
-        }
-
         private void OnRefreshDeviceClick(object sender, RoutedEventArgs e)
         {
-            GetDeviceName();
+            GetDeviceNameAndVersion();
+        }
+
+         private void OnCallClick(object sender, RoutedEventArgs e)
+         {
+             var callScript = "adb shell am start android.intent.action.CALL -d tel:+" + Number.Text;
+             RunScript(callScript);
+         }
+
+        private void OnMessageClick(object sender, RoutedEventArgs e)
+        {
+            var messageScript = "adb shell am start -a android.intent.action.SENDTO -d sms:+" + Number.Text + " --es sms_body \"" + Message.Text + "\" --ez exit_on_sent true";
+            RunScript(messageScript);
+        }
+
+        private void OnCutClick(object sender, RoutedEventArgs e)
+        {
+            var cutScript = "adb shell input keyevent 277";
+            RunScript(cutScript);
+        }
+
+        private void OnCopyClick(object sender, RoutedEventArgs e)
+        {
+            var copyScript = "adb shell input keyevent 278";
+            RunScript(copyScript);
+        }
+
+        private void OnPasteClick(object sender, RoutedEventArgs e)
+        {
+            var pasteClick = "adb shell input keyevent 279";
+            RunScript(pasteClick);
+        }
+
+        private void OnInsertTextClick(object sender, RoutedEventArgs e)
+        {
+            var text = InsertText.Text.Replace(" ", "%s");
+            var insertTextScript = "adb shell input text \"" + text + "\"";
+            RunScript(insertTextScript);
         }
     }
 }

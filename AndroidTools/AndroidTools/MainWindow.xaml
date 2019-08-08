@@ -65,7 +65,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="807,218,0,0" TextWrapping="Wrap" Text="Videos saved in Movies directory" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
         <TextBox x:Name="AppName" HorizontalAlignment="Left" Height="21" Margin="14,36,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="162" Background="#FFBAC1B8"/>
         <Label Content="App Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="673,233,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Call" HorizontalAlignment="Left" Margin="673,233,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
         <Label Content="Back" HorizontalAlignment="Left" Margin="10,519,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.196,0.487"/>
         <Button Content="Back Button" HorizontalAlignment="Left" Margin="32,542,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnBackButtonClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Home" HorizontalAlignment="Left" Margin="10,567,0,0" VerticalAlignment="Top" Foreground="White"/>
@@ -86,11 +86,22 @@
         <Label Content="Custom adb Command" HorizontalAlignment="Left" Margin="391,391,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="AdbCommand" HorizontalAlignment="Left" Height="25" Margin="410,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
         <Button Content="Execute adb Command" HorizontalAlignment="Left" Margin="510,447,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnExecuteAdbCommandClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <TextBox x:Name="SharedPrefDestination" HorizontalAlignment="Left" Height="40" Margin="693,259,0,0" TextWrapping="Wrap" Text="C:\Desktop\" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
-        <Button Content="Get Shared Preferences" HorizontalAlignment="Left" Margin="792,329,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnGetSharedPrefClick" Background="#FFFB3640" Foreground="White" IsEnabled="False"/>
-        <TextBox x:Name="SharedPrefAppName" HorizontalAlignment="Left" Height="20" Margin="693,304,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
-        <Label Content="Connected Device:" HorizontalAlignment="Left" Margin="239,574,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock Name="ConnectedDevice" HorizontalAlignment="Left" Margin="282,600,0,0" TextWrapping="Wrap" Text="Device" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="391,576,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="Number" HorizontalAlignment="Left" Height="22" Margin="746,259,0,0" TextWrapping="Wrap" Text="0000000000" VerticalAlignment="Top" Width="191" Background="#FFBAC1B8"/>
+        <Button Content="Call" HorizontalAlignment="Left" Margin="792,365,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnCallClick" Background="#FFFB3640" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="213,612,0,0" TextWrapping="Wrap" Text="Connected Device:" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="449,653,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Number:" HorizontalAlignment="Left" Margin="685,259,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <TextBox x:Name="Message" HorizontalAlignment="Left" Height="74" Margin="746,286,0,0" TextWrapping="Wrap" Text="text" VerticalAlignment="Top" Width="191" Background="#FFBAC1B8"/>
+        <Button Content="Message" HorizontalAlignment="Left" Margin="792,395,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnMessageClick" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Message:" HorizontalAlignment="Left" Margin="685,286,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <Button Content="Cut" HorizontalAlignment="Left" Margin="223,468,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnCutClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Copy" HorizontalAlignment="Left" Margin="223,498,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnCopyClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Paste" HorizontalAlignment="Left" Margin="223,528,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnPasteClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Insert Text" HorizontalAlignment="Left" Margin="792,523,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInsertTextClick" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="InsertText" HorizontalAlignment="Left" Height="74" Margin="693,444,0,0" TextWrapping="Wrap" Text="text" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Label Content="Insert Text" HorizontalAlignment="Left" Margin="673,418,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <TextBlock HorizontalAlignment="Left" Margin="223,633,0,0" TextWrapping="Wrap" Text="Android Version:" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="ConnectedDevice" HorizontalAlignment="Left" Margin="334,612,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="AndroidVersion" HorizontalAlignment="Left" Margin="334,633,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
     </Grid>
 </Window>
