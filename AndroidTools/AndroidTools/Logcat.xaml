@@ -1,0 +1,13 @@
+﻿<Window x:Class="AndroidTools.Logcat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AndroidTools"
+        mc:Ignorable="d"
+        Title="Logcat" Height="799.098" Width="588.918">
+    <Grid Background="#FF004459">
+        <TextBox x:Name="logcatBox" HorizontalAlignment="Left" Height="707" TextWrapping="Wrap" VerticalAlignment="Top" Width="526" Margin="23,24,0,0" VerticalScrollBarVisibility="Visible"/>
+
+    </Grid>
+</Window>

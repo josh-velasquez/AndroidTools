@@ -79,7 +79,6 @@ namespace AndroidTools
             try
             {
                 var actualCommand = commands.Split('\n');
-                var test = new StringBuilder();
                 using (var powerShell = PowerShell.Create())
                 {
                     foreach (var command in actualCommand)
@@ -400,39 +399,39 @@ namespace AndroidTools
 
          private void OnCallClick(object sender, RoutedEventArgs e)
          {
-             var callScript = "adb shell am start android.intent.action.CALL -d tel:+" + Number.Text;
-             RunScript(callScript);
+             var callCommand = "adb shell am start android.intent.action.CALL -d tel:+" + Number.Text;
+             RunScript(callCommand);
          }
 
         private void OnMessageClick(object sender, RoutedEventArgs e)
         {
-            var messageScript = "adb shell am start -a android.intent.action.SENDTO -d sms:+" + Number.Text + " --es sms_body \"" + Message.Text + "\" --ez exit_on_sent true";
-            RunScript(messageScript);
+            var messageCommand = "adb shell am start -a android.intent.action.SENDTO -d sms:+" + Number.Text + " --es sms_body \"" + Message.Text + "\" --ez exit_on_sent true";
+            RunScript(messageCommand);
         }
 
         private void OnCutClick(object sender, RoutedEventArgs e)
         {
-            var cutScript = "adb shell input keyevent 277";
-            RunScript(cutScript);
+            var cutCommand = "adb shell input keyevent 277";
+            RunScript(cutCommand);
         }
 
         private void OnCopyClick(object sender, RoutedEventArgs e)
         {
-            var copyScript = "adb shell input keyevent 278";
-            RunScript(copyScript);
+            var copyCommand = "adb shell input keyevent 278";
+            RunScript(copyCommand);
         }
 
         private void OnPasteClick(object sender, RoutedEventArgs e)
         {
-            var pasteClick = "adb shell input keyevent 279";
-            RunScript(pasteClick);
+            var pasteCommand = "adb shell input keyevent 279";
+            RunScript(pasteCommand);
         }
 
         private void OnInsertTextClick(object sender, RoutedEventArgs e)
         {
             var text = InsertText.Text.Replace(" ", "%s");
-            var insertTextScript = "adb shell input text \"" + text + "\"";
-            RunScript(insertTextScript);
+            var insertTextCommand = "adb shell input text \"" + text + "\"";
+            RunScript(insertTextCommand);
         }
 
         private void OnRebootBootloaderClick(object sender, RoutedEventArgs e)
@@ -445,6 +444,12 @@ namespace AndroidTools
         {
             var settingsCommand = "adb shell am start -a android.settings.SETTINGS";
             RunScript(settingsCommand);
+        }
+
+        private void OnSeeLogCatClick(object sender, RoutedEventArgs e)
+        {
+            Logcat logcatWindow = new Logcat(filterTag.Text);
+            logcatWindow.Show();
         }
     }
 }

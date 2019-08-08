@@ -36,3 +36,5 @@ C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTool
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.csproj.CopyComplete
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.exe
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.pdb
+C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.g.cs
+C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.baml

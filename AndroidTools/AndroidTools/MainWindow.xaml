@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AndroidTools"
         mc:Ignorable="d"
-        Title="Android Tools" Height="738.995" Width="996.631">
+        Title="Android Tools" Height="834.995" Width="996.631">
     <Grid Background="#FF004459">
         <Label Content="Location Permissions" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Enable" HorizontalAlignment="Left" Margin="32,88,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnEnableLocationClick" Background="#FFFB3640" Foreground="White" BorderBrush="#FFBAC1B8"/>
@@ -88,24 +88,28 @@
         <Button Content="Execute adb Command" HorizontalAlignment="Left" Margin="510,447,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnExecuteAdbCommandClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
         <TextBox x:Name="Number" HorizontalAlignment="Left" Height="22" Margin="746,259,0,0" TextWrapping="Wrap" Text="0000000000" VerticalAlignment="Top" Width="191" Background="#FFBAC1B8"/>
         <Button Content="Call" HorizontalAlignment="Left" Margin="792,365,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnCallClick" Background="#FFFB3640" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="213,612,0,0" TextWrapping="Wrap" Text="Connected Device:" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="449,653,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Number:" HorizontalAlignment="Left" Margin="685,259,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <TextBlock HorizontalAlignment="Left" Margin="222,655,0,0" TextWrapping="Wrap" Text="Connected Device:" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="458,696,0,0" VerticalAlignment="Top" Width="125" Height="24" Click="OnRefreshDeviceClick" RenderTransformOrigin="0.478,1.16" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Number:" HorizontalAlignment="Left" Margin="685,255,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
         <TextBox x:Name="Message" HorizontalAlignment="Left" Height="74" Margin="746,286,0,0" TextWrapping="Wrap" Text="text" VerticalAlignment="Top" Width="191" Background="#FFBAC1B8"/>
         <Button Content="Message" HorizontalAlignment="Left" Margin="792,395,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnMessageClick" Background="#FFFB3640" Foreground="White"/>
-        <Label Content="Message:" HorizontalAlignment="Left" Margin="685,286,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
-        <Button Content="Cut" HorizontalAlignment="Left" Margin="223,468,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnCutClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Copy" HorizontalAlignment="Left" Margin="223,498,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnCopyClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Paste" HorizontalAlignment="Left" Margin="223,528,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnPasteClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Insert Text" HorizontalAlignment="Left" Margin="792,523,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInsertTextClick" Background="#FFFB3640" Foreground="White"/>
-        <TextBox x:Name="InsertText" HorizontalAlignment="Left" Height="74" Margin="693,444,0,0" TextWrapping="Wrap" Text="text" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
+        <Label Content="Message:" HorizontalAlignment="Left" Margin="685,282,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <Button Content="Cut" HorizontalAlignment="Left" Margin="32,689,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnCutClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Copy" HorizontalAlignment="Left" Margin="32,719,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnCopyClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Paste" HorizontalAlignment="Left" Margin="32,749,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnPasteClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Insert" HorizontalAlignment="Left" Margin="792,502,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInsertTextClick" Background="#FFFB3640" Foreground="White"/>
+        <TextBox x:Name="InsertText" HorizontalAlignment="Left" Height="55" Margin="693,444,0,0" TextWrapping="Wrap" Text="text" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
         <Label Content="Insert Text" HorizontalAlignment="Left" Margin="673,418,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
-        <TextBlock HorizontalAlignment="Left" Margin="223,633,0,0" TextWrapping="Wrap" Text="Android Version:" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock x:Name="ConnectedDevice" HorizontalAlignment="Left" Margin="334,612,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock x:Name="AndroidVersion" HorizontalAlignment="Left" Margin="334,633,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="232,676,0,0" TextWrapping="Wrap" Text="Android Version:" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="ConnectedDevice" HorizontalAlignment="Left" Margin="343,655,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="AndroidVersion" HorizontalAlignment="Left" Margin="343,676,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Reboot" HorizontalAlignment="Left" Margin="223,342,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootBootloaderClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Reboot Bootloader" HorizontalAlignment="Left" Margin="202,316,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Settings" HorizontalAlignment="Left" Margin="202,213,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Launch Settings" HorizontalAlignment="Left" Margin="223,239,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnSettingsClick" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="See logcat" HorizontalAlignment="Left" Margin="792,593,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnSeeLogCatClick" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Logcat Filter" HorizontalAlignment="Left" Margin="673,528,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <TextBox x:Name="filterTag" HorizontalAlignment="Left" Height="22" Margin="758,554,0,0" TextWrapping="Wrap" Text="TAG" VerticalAlignment="Top" Width="179" Background="#FFBAC1B8"/>
+        <Label Content="TAG Filter:" HorizontalAlignment="Left" Margin="685,550,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
     </Grid>
 </Window>

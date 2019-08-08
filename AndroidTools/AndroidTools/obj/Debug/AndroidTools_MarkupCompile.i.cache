@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\
+C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\
 AndroidTools
 none
 false
 DEBUG;TRACE
-F:\Repositories\AndroidTools\AndroidTools\AndroidTools\App.xaml
-11151548125
+C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\App.xaml
+2-1824578442
 
-6-431219227
-141819585203
-MainWindow.xaml;
+10-51197215
+14-1924657761
+Logcat.xaml;MainWindow.xaml;
 
-False
+True
 
