@@ -21,7 +21,7 @@
         <Button Content="Off" HorizontalAlignment="Left" Margin="295,188,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnAirplaneModeOffClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Installation" HorizontalAlignment="Left" Margin="391,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.562,0" Foreground="White"/>
         <Button Content="Uninstall App" HorizontalAlignment="Left" Margin="509,136,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnUninstallAppClick" Background="#FFFB3640" Foreground="White"/>
-        <Button Content="Disable USB Debugging" HorizontalAlignment="Left" Margin="223,291,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnDisbaleUsbDebuggingClick" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Disable USB Debugging" HorizontalAlignment="Left" Margin="223,393,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnDisbaleUsbDebuggingClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Draw Over Apps" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Allow Draw Over Apps" HorizontalAlignment="Left" Margin="32,239,0,0" VerticalAlignment="Top" Width="144" Height="25" Click="OnAllowDrawOverAppClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Send Custom Broadcast" HorizontalAlignment="Left" Margin="509,230,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnSendCustomBroadcastClick" RenderTransformOrigin="0.497,0.12" Background="#FFFB3640" Foreground="White"/>
@@ -43,14 +43,14 @@
         <Button Content="Enable" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnEnableStorageClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Disable" HorizontalAlignment="Left" Margin="109,189,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnDisableStorageClick" Background="#FFFB3640" Foreground="White"/>
         <Button Content="Install App" HorizontalAlignment="Left" Margin="509,79,0,0" VerticalAlignment="Top" Width="145" Height="25" Click="OnInstallAppClick" Background="#FFFB3640" Foreground="White" RenderTransformOrigin="0.995,0.36"/>
-        <Label Content="USB Debugging" HorizontalAlignment="Left" Margin="202,265,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="USB Debugging" HorizontalAlignment="Left" Margin="202,367,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Broadcasts" HorizontalAlignment="Left" Margin="391,159,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Home App" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="InstallSource" HorizontalAlignment="Left" Height="40" Margin="410,34,0,0" TextWrapping="Wrap" Text="C:\Desktop\Sample\com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
         <TextBox x:Name="UninstallSource" HorizontalAlignment="Left" Height="23" Margin="410,108,0,0" TextWrapping="Wrap" Text="com.test.app" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
-        <Label Content="Reboot" HorizontalAlignment="Left" Margin="202,213,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Reboot" HorizontalAlignment="Left" Margin="202,264,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Pull" HorizontalAlignment="Left" Margin="558,365,0,0" VerticalAlignment="Top" Width="95" Height="25" Click="OnPullClick" Background="#FFFB3640" Foreground="White" RenderTransformOrigin="0.969,0.56"/>
-        <Button Content="Reboot App" HorizontalAlignment="Left" Margin="223,239,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootClick" Background="#FFFB3640" Foreground="White"/>
+        <Button Content="Reboot" HorizontalAlignment="Left" Margin="223,290,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootClick" Background="#FFFB3640" Foreground="White"/>
         <Label Content="Screenshot" HorizontalAlignment="Left" Margin="673,10,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Take Screenshot" HorizontalAlignment="Left" Margin="792,61,0,0" VerticalAlignment="Top" Width="145"  Height="25" Click="OnScreenshotClick" Background="#FFFB3640" Foreground="White"/>
         <TextBox x:Name="ScreenshotName" HorizontalAlignment="Left" Height="23" Margin="693,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" Background="#FFBAC1B8"/>
@@ -103,5 +103,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="223,633,0,0" TextWrapping="Wrap" Text="Android Version:" VerticalAlignment="Top" Foreground="White"/>
         <TextBlock x:Name="ConnectedDevice" HorizontalAlignment="Left" Margin="334,612,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
         <TextBlock x:Name="AndroidVersion" HorizontalAlignment="Left" Margin="334,633,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Reboot" HorizontalAlignment="Left" Margin="223,342,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnRebootBootloaderClick" Background="#FFFB3640" Foreground="White"/>
+        <Label Content="Reboot Bootloader" HorizontalAlignment="Left" Margin="202,316,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Settings" HorizontalAlignment="Left" Margin="202,213,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button Content="Launch Settings" HorizontalAlignment="Left" Margin="223,239,0,0" VerticalAlignment="Top" Width="139" Height="25" Click="OnSettingsClick" Background="#FFFB3640" Foreground="White"/>
     </Grid>
 </Window>
