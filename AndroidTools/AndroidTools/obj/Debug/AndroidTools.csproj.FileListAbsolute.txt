@@ -12,7 +12,6 @@ F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\MainWindow.baml
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.g.resources
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.Properties.Resources.resources
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.csproj.GenerateResource.cache
-F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.csproj.CoreCompileInputs.cache
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.csproj.CopyComplete
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.exe
 F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.pdb
@@ -38,3 +37,5 @@ C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTool
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\AndroidTools.pdb
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.g.cs
 C:\Users\JVelasquez\Documents\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.baml
+F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.g.cs
+F:\Repositories\AndroidTools\AndroidTools\AndroidTools\obj\Debug\Logcat.baml

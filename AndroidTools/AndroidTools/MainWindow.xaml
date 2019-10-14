@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AndroidTools"
         mc:Ignorable="d"
-        Title="Android Tools" Height="834.995" Width="996.631">
+        Title="Android Tools" Height="1047.495" Width="996.631">
     <Grid Background="#FF004459">
         <Label Content="Location Permissions" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="Enable" HorizontalAlignment="Left" Margin="32,88,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="OnEnableLocationClick" Background="#FFFB3640" Foreground="White" BorderBrush="#FFBAC1B8"/>
@@ -111,5 +111,7 @@
         <Label Content="Logcat Filter" HorizontalAlignment="Left" Margin="673,528,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
         <TextBox x:Name="filterTag" HorizontalAlignment="Left" Height="22" Margin="758,554,0,0" TextWrapping="Wrap" Text="TAG" VerticalAlignment="Top" Width="179" Background="#FFBAC1B8"/>
         <Label Content="TAG Filter:" HorizontalAlignment="Left" Margin="685,550,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.966,0.385"/>
+        <Label Content="Permissions" HorizontalAlignment="Left" Margin="14,794,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.115,6.173" Foreground="White"/>
+        <ComboBox Name="PermissionComboBox" HorizontalAlignment="Left" Margin="32,825,0,0" VerticalAlignment="Top" Width="264" Background="#FFFB3640" BorderBrush="#FFFB3640"/>
     </Grid>
 </Window>

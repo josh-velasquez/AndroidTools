@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AndroidTools.Model;
+using AndroidTools.Utils;
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Management.Automation;
 using System.Text;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace AndroidTools
 {
@@ -21,7 +20,18 @@ namespace AndroidTools
         public MainWindow()
         {
             InitializeComponent();
+            SetComboBoxPermission();
             GetDeviceNameAndVersion();
+        }
+
+        private void SetComboBoxPermission()
+        {
+            PermissionComboBox.Items.Add("-- select a permission --");
+            PermissionComboBox.SelectedIndex = 0;
+            foreach (var permission in Enum.GetValues(typeof(Permission)).Cast<Permission>())
+            {
+                PermissionComboBox.Items.Add(permission);
+            }
         }
 
         private void GetDeviceNameAndVersion()
@@ -30,8 +40,8 @@ namespace AndroidTools
             var deviceVersion = "N/A";
             try
             {
-                var deviceInfoCommand = "adb devices -l";
-                var results = RunScriptWithOutput(deviceInfoCommand);
+                var deviceInfoCommand = EnumUtil.GetEnumDescription(Command.ListAndroidDevices);
+                var results = PowerShellUtil.RunScriptWithOutput(deviceInfoCommand);
                 foreach (var name in results)
                 {
                     if (name.Contains("device product"))
@@ -40,8 +50,8 @@ namespace AndroidTools
                     }
                 }
 
-                var deviceVersionCommand = "adb shell getprop ro.build.version.release";
-                deviceVersion = RunScriptWithOutput(deviceVersionCommand)[0];
+                var deviceVersionCommand = EnumUtil.GetEnumDescription(Command.AndroidDeviceVersion);
+                deviceVersion = PowerShellUtil.RunScriptWithOutput(deviceVersionCommand)[0];
 
             }
             catch (Exception e)
@@ -53,88 +63,16 @@ namespace AndroidTools
             AndroidVersion.Text = deviceVersion;
         }
 
-        private void RunScript(string commands)
-        {
-            try
-            {
-                var actualCommand = commands.Split('\n');
-                using (var powerShell = PowerShell.Create())
-                {
-                    foreach (var command in actualCommand)
-                    {
-                        powerShell.AddScript(command);
-                    }
-                    powerShell.Invoke();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-        }
-
-        private List<string> RunScriptWithOutput(string commands)
-        {
-            var powerShellOutputsList = new List<string>();
-            try
-            {
-                var actualCommand = commands.Split('\n');
-                using (var powerShell = PowerShell.Create())
-                {
-                    foreach (var command in actualCommand)
-                    {
-                        powerShell.AddScript(command);
-                    }
-                    var powerShellOutput = powerShell.Invoke();
-                    if (powerShellOutput.Count != 0)
-                    {
-                        foreach (var line in powerShellOutput)
-                        {
-                            powerShellOutputsList.Add(line.ToString());
-                        }
-                    }
-                }
-
-                return powerShellOutputsList;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            return powerShellOutputsList;
-        }
-
-        private void Test(string commands)
-        {
-            using (Process proc = new Process())
-            {
-                ProcessStartInfo procStartInfo = new ProcessStartInfo("F:\\Android\\android-sdk\\platform-tools\\adb.exe");
-                procStartInfo.RedirectStandardInput = true;
-                procStartInfo.RedirectStandardOutput = true;
-                procStartInfo.RedirectStandardError = true;
-                procStartInfo.UseShellExecute = false;
-                procStartInfo.CreateNoWindow = true;
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-                var actualCommand = commands.Split('\n');
-                foreach (var line in actualCommand)
-                {
-                    proc.StandardInput.WriteLine(line);
-                }
-                proc.WaitForExit();
-            } 
-        }
-
         private void OnShowNavBarClick(object sender, RoutedEventArgs e)
         {
-            var showNavBarCommand = "adb shell wm overscan 0,0,0,0";
-            RunScript(showNavBarCommand);
+            var showNavBarCommand = EnumUtil.GetEnumDescription(Command.ShowNavBar);
+            PowerShellUtil.RunScript(showNavBarCommand);
         }
 
         private void OnHideNavBarClick(object sender, RoutedEventArgs e)
         {
-            var hideNavBarCommand = "adb shell wm overscan 0,0,0,-100";
-            RunScript(hideNavBarCommand);
+            var hideNavBarCommand = EnumUtil.GetEnumDescription(Command.HideNavBar);
+            PowerShellUtil.RunScript(hideNavBarCommand);
         }
 
         private void OnWifiOnClick(object sender, RoutedEventArgs e)
@@ -144,7 +82,7 @@ namespace AndroidTools
                 "adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings\n");
             stringBuilder.Append(
                 "adb shell input keyevent 23 \"&\" adb shell input keyevent 19");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnWifiOffClick(object sender, RoutedEventArgs e)
@@ -154,7 +92,7 @@ namespace AndroidTools
                 "adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings\n");
             stringBuilder.Append(
                 "adb shell input keyevent 23 \"&\" adb shell input keyevent 19");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnAirplaneModeOnClick(object sender, RoutedEventArgs e)
@@ -167,7 +105,7 @@ namespace AndroidTools
             stringBuilder.Append("adb shell input keyevent 23\n");
             stringBuilder.Append("adb shell input keyevent 22\n");
             stringBuilder.Append("adb shell input keyevent 23");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnAirplaneModeOffClick(object sender, RoutedEventArgs e)
@@ -178,7 +116,7 @@ namespace AndroidTools
             stringBuilder.Append("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS\n");
             stringBuilder.Append("adb shell input keyevent 19\n");
             stringBuilder.Append("adb shell input keyevent 23");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnAllowDrawOverAppClick(object sender, RoutedEventArgs e)
@@ -194,20 +132,20 @@ namespace AndroidTools
 
         private void OnUninstallAppClick(object sender, RoutedEventArgs e)
         {
-            var uninstallCommand = "adb uninstall " + UninstallSource.Text;
-            RunScript(uninstallCommand);
+            var uninstallCommand = EnumUtil.GetEnumDescription(Command.UninstallApp) + UninstallSource.Text;
+            PowerShellUtil.RunScript(uninstallCommand);
         }
 
         private void OnDisbaleUsbDebuggingClick(object sender, RoutedEventArgs e)
         {
-            var disableUsbDebugging = "adb shell settings put global adb_enabled 0";
-            RunScript(disableUsbDebugging);
+            var disableUsbDebugging = EnumUtil.GetEnumDescription(Command.DisableUsbDebugging);
+            PowerShellUtil.RunScript(disableUsbDebugging);
         }
 
         private void OnSendCustomBroadcastClick(object sender, RoutedEventArgs e)
         {
-            var broadcast = "adb shell am broadcast -a " + BroadcastInput.Text;
-            RunScript(broadcast);
+            var broadcast = EnumUtil.GetEnumDescription(Command.SendBroadcast) + BroadcastInput.Text;
+            PowerShellUtil.RunScript(broadcast);
         }
 
         private void OnSetHomeAppClick(object sender, RoutedEventArgs e)
@@ -219,7 +157,7 @@ namespace AndroidTools
             stringBuilder.Append("adb shell input keyevent 66\n");
             stringBuilder.Append("adb shell input keyevent 20\n");
             stringBuilder.Append("adb shell input keyevent 66");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnEnableBluetoothClick(object sender, RoutedEventArgs e)
@@ -230,7 +168,7 @@ namespace AndroidTools
             stringBuilder.Append("adb shell input keyevent 22\n");
             stringBuilder.Append("adb shell input keyevent 22\n");
             stringBuilder.Append("adb shell input keyevent 66\n");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnDisableBluetoothClick(object sender, RoutedEventArgs e)
@@ -240,8 +178,7 @@ namespace AndroidTools
             stringBuilder.Append("adb shell am start -a android.settings.BLUETOOTH_SETTINGS\n");
             stringBuilder.Append("adb shell input keyevent 19\n");
             stringBuilder.Append("adb shell input keyevent 23\n");
-            RunScript(stringBuilder.ToString());
-    
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnEnableLocationClick(object sender, RoutedEventArgs e)
@@ -249,7 +186,7 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.ACCESS_FINE_LOCATION\n");
             stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.ACCESS_COARSE_LOCATION\n");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnDisableLocationClick(object sender, RoutedEventArgs e)
@@ -257,21 +194,21 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.ACCESS_FINE_LOCATION\n");
             stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.ACCESS_COARSE_LOCATION\n");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnEnablePhoneClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.READ_PHONE_STATE");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnDisablePhoneClick(object sender, RoutedEventArgs e)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.READ_PHONE_STATE");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnEnableStorageClick(object sender, RoutedEventArgs e)
@@ -279,7 +216,7 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.WRITE_EXTERNAL_STORAGE\n");
             stringBuilder.Append("adb shell pm grant " + AppName.Text + " android.permission.READ_EXTERNAL_STORAGE\n");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnDisableStorageClick(object sender, RoutedEventArgs e)
@@ -287,109 +224,109 @@ namespace AndroidTools
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.WRITE_EXTERNAL_STORAGE\n");
             stringBuilder.Append("adb shell pm revoke " + AppName.Text + " android.permission.READ_EXTERNAL_STORAGE\n");
-            RunScript(stringBuilder.ToString());
+            PowerShellUtil.RunScript(stringBuilder.ToString());
         }
 
         private void OnInstallAppClick(object sender, RoutedEventArgs e)
         {
-            var installCommand = "adb install " + InstallSource.Text;
-            RunScript(installCommand);
+            var installCommand = EnumUtil.GetEnumDescription(Command.InstallApp) + InstallSource.Text;
+            PowerShellUtil.RunScript(installCommand);
         }
 
         private void OnPushClick(object sender, RoutedEventArgs e)
         {
             var transferCommand = "adb push \"" + TransferSource.Text + "\" \"" + TransferDestination.Text + "\"";
-            RunScript(transferCommand);
+            PowerShellUtil.RunScript(transferCommand);
         }
 
         private void OnPullClick(object sender, RoutedEventArgs e)
         {
             var transferCommand = "adb pull \"" + TransferSource.Text + "\" \"" + TransferDestination.Text + "\"";
-            RunScript(transferCommand);
+            PowerShellUtil.RunScript(transferCommand);
         }
 
         private void OnRebootClick(object sender, RoutedEventArgs e)
         {
             var rebootCommand = "adb reboot";
-            RunScript(rebootCommand);
+            PowerShellUtil.RunScript(rebootCommand);
         }
 
         private void OnScreenshotClick(object sender, RoutedEventArgs e)
         {
             var screenshotCommand = "adb shell screencap /mnt/sdcard/Pictures/" + ScreenshotName.Text + ".png";
-            RunScript(screenshotCommand);
+            PowerShellUtil.RunScript(screenshotCommand);
         }
 
         private void OnRecordScreenClick(object sender, RoutedEventArgs e)
         {
             var duration = int.Parse(ScreenRecordDuration.Text);
             var recordScreenCommand = "adb shell screenrecord --time-limit " + duration + " /mnt/sdcard/Movies/" + ScreenRecordPath.Text + ".mp4";
-            RunScript(recordScreenCommand);
+            PowerShellUtil.RunScript(recordScreenCommand);
         }
 
         private void OnBackButtonClick(object sender, RoutedEventArgs e)
         {
-            var backCommand = "adb shell input keyevent 4";
-            RunScript(backCommand);
+            var backCommand = EnumUtil.GetEnumDescription(Command.BackButton);
+            PowerShellUtil.RunScript(backCommand);
         }
 
         private void OnHomeButtonClick(object sender, RoutedEventArgs e)
         {
-            var homeCommand = "adb shell input keyevent 3";
-            RunScript(homeCommand);
+            var homeCommand = EnumUtil.GetEnumDescription(Command.HomeButton);
+            PowerShellUtil.RunScript(homeCommand);
         }
 
         private void OnMultitaskButtonClick(object sender, RoutedEventArgs e)
         {
-            var multitaskCommand = "adb shell input keyevent 187";
-            RunScript(multitaskCommand);
+            var multitaskCommand = EnumUtil.GetEnumDescription(Command.MultitaskButton);
+            PowerShellUtil.RunScript(multitaskCommand);
         }
 
         private void OnBrightenClick(object sender, RoutedEventArgs e)
         {
-            var brightenCommand = "adb shell input keyevent 221";
-            RunScript(brightenCommand);
+            var brightenCommand = EnumUtil.GetEnumDescription(Command.Brighten);
+            PowerShellUtil.RunScript(brightenCommand);
         }
 
         private void OnDimClick(object sender, RoutedEventArgs e)
         {
-            var dimCommand = "adb shell input keyevent 220";
-            RunScript(dimCommand);
+            var dimCommand = EnumUtil.GetEnumDescription(Command.Dim);
+            PowerShellUtil.RunScript(dimCommand);
         }
 
         private void OnPowerClick(object sender, RoutedEventArgs e)
         {
-            var powerCommand = "adb shell input keyevent 26";
-            RunScript(powerCommand);
+            var powerCommand = EnumUtil.GetEnumDescription(Command.PowerButton);
+            PowerShellUtil.RunScript(powerCommand);
         }
 
         private void OnVolumeUpClick(object sender, RoutedEventArgs e)
         {
-            var upVolumeCommand = "adb shell input keyevent 24";
-            RunScript(upVolumeCommand);
+            var upVolumeCommand = EnumUtil.GetEnumDescription(Command.UpVolumeButton);
+            PowerShellUtil.RunScript(upVolumeCommand);
         }
 
         private void OnVolumeDownClick(object sender, RoutedEventArgs e)
         {
-            var downVolumeCommand = "adb shell input keyevent 25";
-            RunScript(downVolumeCommand);
+            var downVolumeCommand = EnumUtil.GetEnumDescription(Command.DownVolumeButton);
+            PowerShellUtil.RunScript(downVolumeCommand);
         }
 
         private void OnExpandStatusBarClick(object sender, RoutedEventArgs e)
         {
-            var expandCommand = "adb shell cmd statusbar expand-settings";
-            RunScript(expandCommand);
+            var expandCommand = EnumUtil.GetEnumDescription(Command.ExpandStatusBar);
+            PowerShellUtil.RunScript(expandCommand);
         }
 
         private void OnCollapseStatusBarClick(object sender, RoutedEventArgs e)
         {
-            var collapseCommand = "adb shell cmd statusbar collapse";
-            RunScript(collapseCommand);
+            var collapseCommand = EnumUtil.GetEnumDescription(Command.CollapseStatusBar);
+            PowerShellUtil.RunScript(collapseCommand);
         }
 
         private void OnExecuteAdbCommandClick(object sender, RoutedEventArgs e)
         {
-            RunScript(AdbCommand.Text);
+            PowerShellUtil.RunScript(AdbCommand.Text);
         }
 
         private void OnRefreshDeviceClick(object sender, RoutedEventArgs e)
@@ -399,51 +336,51 @@ namespace AndroidTools
 
          private void OnCallClick(object sender, RoutedEventArgs e)
          {
-             var callCommand = "adb shell am start android.intent.action.CALL -d tel:+" + Number.Text;
-             RunScript(callCommand);
+             var callCommand = EnumUtil.GetEnumDescription(Command.CallNumber) + Number.Text;
+             PowerShellUtil.RunScript(callCommand);
          }
 
         private void OnMessageClick(object sender, RoutedEventArgs e)
         {
             var messageCommand = "adb shell am start -a android.intent.action.SENDTO -d sms:+" + Number.Text + " --es sms_body \"" + Message.Text + "\" --ez exit_on_sent true";
-            RunScript(messageCommand);
+            PowerShellUtil.RunScript(messageCommand);
         }
 
         private void OnCutClick(object sender, RoutedEventArgs e)
         {
-            var cutCommand = "adb shell input keyevent 277";
-            RunScript(cutCommand);
+            var cutCommand = EnumUtil.GetEnumDescription(Command.Cut);
+            PowerShellUtil.RunScript(cutCommand);
         }
 
         private void OnCopyClick(object sender, RoutedEventArgs e)
         {
-            var copyCommand = "adb shell input keyevent 278";
-            RunScript(copyCommand);
+            var copyCommand = EnumUtil.GetEnumDescription(Command.Copy);
+            PowerShellUtil.RunScript(copyCommand);
         }
 
         private void OnPasteClick(object sender, RoutedEventArgs e)
         {
-            var pasteCommand = "adb shell input keyevent 279";
-            RunScript(pasteCommand);
+            var pasteCommand = EnumUtil.GetEnumDescription(Command.Paste);
+            PowerShellUtil.RunScript(pasteCommand);
         }
 
         private void OnInsertTextClick(object sender, RoutedEventArgs e)
         {
             var text = InsertText.Text.Replace(" ", "%s");
             var insertTextCommand = "adb shell input text \"" + text + "\"";
-            RunScript(insertTextCommand);
+            PowerShellUtil.RunScript(insertTextCommand);
         }
 
         private void OnRebootBootloaderClick(object sender, RoutedEventArgs e)
         {
-            var rebootCommand = "adb reboot bootloader";
-            RunScript(rebootCommand);
+            var rebootCommand = EnumUtil.GetEnumDescription(Command.RebootBootloader);
+            PowerShellUtil.RunScript(rebootCommand);
         }
 
         private void OnSettingsClick(object sender, RoutedEventArgs e)
         {
-            var settingsCommand = "adb shell am start -a android.settings.SETTINGS";
-            RunScript(settingsCommand);
+            var settingsCommand = EnumUtil.GetEnumDescription(Command.Settings);
+            PowerShellUtil.RunScript(settingsCommand);
         }
 
         private void OnSeeLogCatClick(object sender, RoutedEventArgs e)
