@@ -65,13 +65,13 @@ namespace AndroidTools
 
         private void OnShowNavBarClick(object sender, RoutedEventArgs e)
         {
-            var showNavBarCommand = EnumUtil.GetEnumDescription(Command.ShowNavBar);
+            var showNavBarCommand = EnumUtil.GetEnumDescription(Command.ShowOverScan);
             PowerShellUtil.RunScript(showNavBarCommand);
         }
 
         private void OnHideNavBarClick(object sender, RoutedEventArgs e)
         {
-            var hideNavBarCommand = EnumUtil.GetEnumDescription(Command.HideNavBar);
+            var hideNavBarCommand = EnumUtil.GetEnumDescription(Command.HideOverScan);
             PowerShellUtil.RunScript(hideNavBarCommand);
         }
 
